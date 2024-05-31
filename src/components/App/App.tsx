@@ -73,7 +73,7 @@ export default function App() {
           return;
         }
         // Записуємо дані в стан
-        setImages((prevImages) => {
+        setImages((prevImages: Image[]) => {
           return [...prevImages, ...data.results];
         });
         setLoaderBtn(true);

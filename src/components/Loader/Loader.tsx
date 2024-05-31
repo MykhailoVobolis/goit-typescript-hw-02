@@ -1,7 +1,11 @@
 import { ColorRing } from "react-loader-spinner";
 import css from "./Loader.module.css";
 
-export default function Loader({ loading }) {
+interface LoaderProps {
+  loading: boolean;
+}
+
+const Loader: React.FC<LoaderProps> = ({ loading }) => {
   return (
     <ColorRing
       visible={loading}
@@ -12,4 +16,6 @@ export default function Loader({ loading }) {
       colors={["#4830f0", "#de367f", "#4830f0", "#de367f", "#4830f0"]}
     />
   );
-}
+};
+
+export default Loader;

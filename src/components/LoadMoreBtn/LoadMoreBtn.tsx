@@ -1,9 +1,15 @@
 import css from "./LoadMoreBtn.module.css";
 
-export default function LoadMoreBtn({ nextPage }) {
+interface LoadMoreBtnProps {
+  nextPage: () => void;
+}
+
+const LoadMoreBtn: React.FC<LoadMoreBtnProps> = ({ nextPage }) => {
   return (
     <button className={css.loadBtn} onClick={() => nextPage()}>
       Load more
     </button>
   );
-}
+};
+
+export default LoadMoreBtn;
