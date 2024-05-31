@@ -21,10 +21,10 @@ export default function App() {
   const [page, setPage] = useState<number>(1);
   const [inputValue, setInputValue] = useState<string>("");
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
-  const [lageImage, setLageImage] = useState<Image | string>("");
+  const [lageImage, setLageImage] = useState<Image | null>(null);
 
   // Реалізація плавного скролу при додаванні нових зображень
-  const firstNewImageRef = useRef<HTMLLIElement>();
+  const firstNewImageRef = useRef<HTMLLIElement | null>(null);
 
   useEffect((): void => {
     // firstNewImageRef.current && firstNewImageRef.current.scrollIntoView({ behavior: "smooth" });
@@ -110,7 +110,7 @@ export default function App() {
       </>
       {loading && <Loader loading={loading} />}
       {loaderBtn && <LoadMoreBtn nextPage={nextPage} />}
-      {modalIsOpen && <ImageModal isOpen={modalIsOpen} onClose={closeModal} lageImage={lageImage} />}
+      {modalIsOpen && lageImage && <ImageModal isOpen={modalIsOpen} onClose={closeModal} lageImage={lageImage} />}
       <Toaster position="top-right" />
     </div>
   );

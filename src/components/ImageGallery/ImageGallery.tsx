@@ -7,7 +7,7 @@ interface ForwardRefProps {
   items: Image[];
   openModal: (item: Image) => void;
   perPage: number;
-  ref?: React.Ref<HTMLLIElement | null>;
+  ref?: React.Ref<HTMLLIElement>;
 }
 
 const ImageGallery = forwardRef<HTMLLIElement, ForwardRefProps>(({ items, openModal, perPage }, ref) => {
