@@ -1,5 +1,5 @@
 import axios from "axios";
-import { perPage } from "./components/App/App.jsx";
+import { perPage } from "./components/App/App.js";
 
 axios.defaults.baseURL = "https://api.unsplash.com/";
 const API_KEY = "zhbd5bnlj4Z33BsoLbD2q24h_6OBL81KvaMbhV7hWk4";
