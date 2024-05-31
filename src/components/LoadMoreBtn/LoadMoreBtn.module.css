@@ -1,0 +1,20 @@
+.loadBtn {
+  font-family: inherit;
+  border: none;
+  width: 140px;
+  height: 40px;
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.64px;
+  text-transform: uppercase;
+  background-image: linear-gradient(to right, #de367f 0%, #4830f0 51%, #de367f 100%);
+  background-size: 200% auto;
+  transition: 0.5s;
+}
+
+.loadBtn:hover {
+  background-position: right center;
+}
