@@ -8,52 +8,52 @@ import "./App.css";
 import { fetchImagesByWord } from "../../unsplash-api";
 import { useState, useEffect, useRef } from "react";
 import toast, { Toaster } from "react-hot-toast";
+import { Image } from "../../types";
 
-export const perPage = 18; // Кількість зображень що повертаються з API за один запит
+export const perPage: number = 18; // Кількість зображень що повертаються з API за один запит
 
 export default function App() {
   // Оголошуємо стани
-  const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [loaderBtn, setLoaderBtn] = useState(false);
-  const [error, setError] = useState(false);
-  const [page, setPage] = useState(1);
-  const [inputValue, setInputValue] = useState("");
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [lageImage, setLageImage] = useState("");
+  const [images, setImages] = useState<Image[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [loaderBtn, setLoaderBtn] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
+  const [page, setPage] = useState<number>(1);
+  const [inputValue, setInputValue] = useState<string>("");
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+  const [lageImage, setLageImage] = useState<Image | string>("");
 
   // Реалізація плавного скролу при додаванні нових зображень
-  const firstNewImageRef = useRef();
+  const firstNewImageRef = useRef<HTMLLIElement>();
 
-  useEffect(() => {
+  useEffect((): void => {
     // firstNewImageRef.current && firstNewImageRef.current.scrollIntoView({ behavior: "smooth" });
     // Використання оператора опціональної послідовності ?. замість &&
     firstNewImageRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [images]);
 
-  const changeValue = (value) => {
+  const changeValue = (value: string): void => {
     setImages([]);
     setLoaderBtn(false);
     setInputValue(value);
     setPage(1); // Скиданя номеру сторінки результатів при новому пошуку
   };
 
-  const nextPage = () => {
+  const nextPage = (): void => {
     setLoaderBtn(false);
     setLoading(true);
     setPage(page + 1);
   };
 
-  const openModal = (item) => {
+  const openModal = (item: Image): void => {
     setModalIsOpen(true);
     setLageImage(item);
   };
-
-  const closeModal = () => {
+  const closeModal = (): void => {
     setModalIsOpen(false);
   };
 
-  useEffect(() => {
+  useEffect((): void => {
     // Оголошуємо асинхронну функцію сабміту форми
     async function handleSearch() {
       if (inputValue === "") return; // Пропускаємо ефект як що input порожній
@@ -102,7 +102,7 @@ export default function App() {
   return (
     <div className="mainContainer">
       <SearchBar onSearch={changeValue} />
-      {error && <ErrorMessage error={error} />}
+      {error && <ErrorMessage />}
       <>
         {images.length > 0 && (
           <ImageGallery ref={firstNewImageRef} items={images} openModal={openModal} perPage={perPage} />

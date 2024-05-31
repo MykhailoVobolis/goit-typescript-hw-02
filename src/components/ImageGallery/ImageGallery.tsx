@@ -1,16 +1,24 @@
 import ImageCard from "../ImageCard/ImageCard";
-import { forwardRef } from "react";
+import { forwardRef, Ref } from "react";
+import { Image } from "../../types";
 import css from "./ImageGallery.module.css";
 
-const ImageGallery = forwardRef(({ items, openModal, perPage }, ref) => {
+interface ForwardRefProps {
+  items: Image[];
+  openModal: (item: Image) => void;
+  perPage: number;
+  ref?: React.Ref<HTMLLIElement | null>;
+}
+
+const ImageGallery = forwardRef<HTMLLIElement, ForwardRefProps>(({ items, openModal, perPage }, ref) => {
   const newImageIndex = items.length - perPage;
   // Функція перевірки співпадіння індексу масиву зображень
   // Повертає true або false
-  const isNewImage = (index) => index === newImageIndex;
+  const isNewImage = (index: number) => index === newImageIndex;
 
   return (
     <ul className={css.gallery}>
-      {items.map((item, index) => (
+      {items.map((item: Image, index: number) => (
         <li className={css.galleryItem} key={item.id} ref={isNewImage(index) ? ref : null}>
           <ImageCard item={item} openModal={openModal} />
         </li>

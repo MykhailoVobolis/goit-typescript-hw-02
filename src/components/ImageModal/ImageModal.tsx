@@ -1,10 +1,17 @@
 // import "./ImageModal.css";
-import css from "./ImageModal.module.css";
+import { Image } from "../../types";
 import Modal from "react-modal";
+import css from "./ImageModal.module.css";
+
+interface ImageModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  lageImage: Image;
+}
 
 Modal.setAppElement("#root");
 
-export default function ImageModal({ isOpen, onClose, lageImage }) {
+const ImageModal: React.FC<ImageModalProps> = ({ isOpen, onClose, lageImage }) => {
   return (
     <Modal
       isOpen={isOpen}
@@ -23,4 +30,6 @@ export default function ImageModal({ isOpen, onClose, lageImage }) {
       <img className={css.lageImage} src={lageImage.urls.regular} alt={lageImage.alt_description} />
     </Modal>
   );
-}
+};
+
+export default ImageModal;

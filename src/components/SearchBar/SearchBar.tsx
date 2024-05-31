@@ -1,10 +1,18 @@
 import css from "./SearchBar.module.css";
 import { IoIosSearch } from "react-icons/io";
-import { Field, Form, Formik } from "formik";
+import { Field, Form, Formik, FormikHelpers } from "formik";
 import toast from "react-hot-toast";
 
-export default function SearchBar({ onSearch }) {
-  const handleSubmit = (value, actions) => {
+interface SearchBarProps {
+  onSearch: (value: string) => void;
+}
+
+interface Value {
+  search: string;
+}
+
+const SearchBar: React.FC<SearchBarProps> = ({ onSearch }) => {
+  const handleSubmit = (value: Value, actions: FormikHelpers<Value>) => {
     !value.search
       ? toast("Please enter search term!", {
           style: {
@@ -36,4 +44,6 @@ export default function SearchBar({ onSearch }) {
       </Formik>
     </header>
   );
-}
+};
+
+export default SearchBar;
